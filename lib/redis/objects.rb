@@ -62,7 +62,7 @@ class Redis
         @redis = Objects::ConnectionPoolProxy.proxy_if_needed(conn)
       end
       def redis
-        @redis || $redis ||
+        @redis || $redis || Redis.new(url: DeliveryGuru::Application::REDIS_URL) ||
           raise(NotConnected, "Redis::Objects.redis not set to a Redis.new connection")
       end
 
